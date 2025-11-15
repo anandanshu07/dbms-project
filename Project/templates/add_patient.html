@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Add New Patient</h1>
+    
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('add_patient') }}">
+                
+                <div class="mb-3">
+                    <label for="patient_name" class="form-label">Patient Name:</label>
+                    <input type="text" class="form-control" id="patient_name" name="patient_name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address:</label>
+                    <input type="text" class="form-control" id="address" name="address">
+                </div>
+
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth:</label>
+                    <input type="date" class="form-control" id="dob" name="dob">
+                </div>
+
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Gender:</label>
+                    <select class="form-select" id="gender" name="gender">
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone Number:</label>
+                    <input type="text" class="form-control" id="phone_number" name="phone_number">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Patient</button>
+                <a href="{{ url_for('patients') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

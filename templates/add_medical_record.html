@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Medical Record</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Medical Record</h1>
+        <form method="POST" action="{{ url_for('add_medical_record') }}">
+            <label for="patient_id">Patient:</label>
+            <select id="patient_id" name="patient_id" required>
+                {% for pat in patients %}
+                    <option value="{{ pat.Patient_ID }}">{{ pat.Patient_Name }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="doctor_id">Doctor:</label>
+            <select id="doctor_id" name="doctor_id" required>
+                {% for doc in doctors %}
+                    <option value="{{ doc.Doctor_ID }}">{{ doc.Doctor_Name }} ({{ doc.Specialization }})</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="symptoms">Symptoms:</label>
+            <textarea id="symptoms" name="symptoms" rows="4"></textarea><br>
+
+            <label for="diagnosis">Diagnosis:</label>
+            <textarea id="diagnosis" name="diagnosis" rows="4"></textarea><br>
+
+            <button type="submit" class="button">Add Medical Record</button>
+            <a href="{{ url_for('medical_records') }}" class="button back-button">Cancel</a>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

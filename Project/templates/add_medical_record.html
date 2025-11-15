@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Add New Medical Record</h1>
+    
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('add_medical_record') }}">
+                
+                <div class="mb-3">
+                    <label for="patient_id" class="form-label">Patient:</label>
+                    <select classS="form-select" id="patient_id" name="patient_id" required>
+                        <option value="" disabled selected>Select a patient</option>
+                        {% for pat in patients %}
+                            <option value="{{ pat.Patient_ID }}">{{ pat.Patient_Name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="doctor_id" class="form-label">Doctor:</label>
+                    <select class="form-select" id="doctor_id" name="doctor_id" required>
+                        <option value="" disabled selected>Select a doctor</option>
+                        {% for doc in doctors %}
+                            <option value="{{ doc.Doctor_ID }}">{{ doc.Doctor_Name }} ({{ doc.Specialization }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="symptoms" class="form-label">Symptoms:</label>
+                    <textarea class="form-control" id="symptoms" name="symptoms" rows="4"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="diagnosis" class="form-label">Diagnosis:</label>
+                    <textarea class="form-control" id="diagnosis" name="diagnosis" rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Medical Record</button>
+                <a href="{{ url_for('medical_records') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

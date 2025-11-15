@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Add New Department</h1>
+    
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('add_department') }}">
+                
+                <div class="mb-3">
+                    <label for="department_name" class="form-label">Department Name:</label>
+                    <input type="text" class="form-control" id="department_name" name="department_name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Department</button>
+                <a href="{{ url_for('departments') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

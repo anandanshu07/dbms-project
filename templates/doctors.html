@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Doctors</h1>
+        <p><a href="{{ url_for('add_doctor') }}" class="button">Add New Doctor</a></p>
+        <p><a href="{{ url_for('index') }}" class="button back-button">Back to Home</a></p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% if doctors %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Specialization</th>
+                        <th>Phone Number</th>
+                        <th>Department</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doc in doctors %}
+                        <tr>
+                            <td>{{ doc.Doctor_ID }}</td>
+                            <td>{{ doc.Doctor_Name }}</td>
+                            <td>{{ doc.Specialization }}</td>
+                            <td>{{ doc.PhoneNumber }}</td>
+                            <td>{{ doc.Department_Name }}</td>
+                            <td>
+                                <a href="{{ url_for('edit_doctor', id=doc.Doctor_ID) }}" class="button edit-button">Edit</a>
+                                <form action="{{ url_for('delete_doctor', id=doc.Doctor_ID) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="button delete-button" onclick="return confirm('Are you sure you want to delete this doctor? This will fail if there are associated appointments or medical records.');">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No doctors found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

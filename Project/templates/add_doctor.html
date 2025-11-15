@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Add New Doctor</h1>
+    
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('add_doctor') }}">
+                
+                <div class="mb-3">
+                    <label for="doctor_name" class="form-label">Doctor Name:</label>
+                    <input type="text" class="form-control" id="doctor_name" name="doctor_name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="specialization" class="form-label">Specialization:</label>
+                    <input type="text" class="form-control" id="specialization" name="specialization">
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone Number:</label>
+                    <input type="text" class="form-control" id="phone_number" name="phone_number">
+                </div>
+
+                <div class="mb-3">
+                    <label for="department_id" class="form-label">Department:</label>
+                    <select class="form-select" id="department_id" name="department_id" required>
+                        <option value="" disabled selected>Select a department</option>
+                        {% for dept in departments %}
+                            <option value="{{ dept.Department_ID }}">{{ dept.Department_Name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Doctor</button>
+                <a href="{{ url_for('doctors') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

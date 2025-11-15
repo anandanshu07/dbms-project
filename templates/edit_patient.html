@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Patient</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Patient</h1>
+        <form method="POST" action="{{ url_for('edit_patient', id=patient.Patient_ID) }}">
+            <label for="patient_name">Patient Name:</label>
+            <input type="text" id="patient_name" name="patient_name" value="{{ patient.Patient_Name }}" required><br>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" value="{{ patient.Address }}"><br>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" value="{{ patient.DOB_formatted }}"><br>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="">Select Gender</option>
+                <option value="Male" {% if patient.Gender == 'Male' %}selected{% endif %}>Male</option>
+                <option value="Female" {% if patient.Gender == 'Female' %}selected{% endif %}>Female</option>
+                <option value="Other" {% if patient.Gender == 'Other' %}selected{% endif %}>Other</option>
+            </select><br>
+
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ patient.PhoneNumber }}"><br>
+
+            <button type="submit" class="button">Update Patient</button>
+            <a href="{{ url_for('patients') }}" class="button back-button">Cancel</a>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

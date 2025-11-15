@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Schedule New Appointment</h1>
+    
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('add_appointment') }}">
+                
+                <div class="mb-3">
+                    <label for="patient_id" class="form-label">Patient:</label>
+                    <select class="form-select" id="patient_id" name="patient_id" required>
+                        <option value="" disabled selected>Select a patient</option>
+                        {% for pat in patients %}
+                            <option value="{{ pat.Patient_ID }}">{{ pat.Patient_Name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="doctor_id" class="form-label">Doctor:</label>
+                    <select class="form-select" id="doctor_id" name="doctor_id" required>
+                        <option value="" disabled selected>Select a doctor</option>
+                        {% for doc in doctors %}
+                            <option value="{{ doc.Doctor_ID }}">{{ doc.Doctor_Name }} ({{ doc.Specialization }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="appointment_date" class="form-label">Appointment Date & Time:</label>
+                    <input type="datetime-local" class="form-control" id="appointment_date" name="appointment_date" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status:</label>
+                    <select class="form-select" id="status" name="status" required>
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Schedule Appointment</button>
+                <a href="{{ url_for('appointments') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

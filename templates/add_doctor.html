@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Doctor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Doctor</h1>
+        <form method="POST" action="{{ url_for('add_doctor') }}">
+            <label for="doctor_name">Doctor Name:</label>
+            <input type="text" id="doctor_name" name="doctor_name" required><br>
+
+            <label for="specialization">Specialization:</label>
+            <input type="text" id="specialization" name="specialization"><br>
+
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" id="phone_number" name="phone_number"><br>
+
+            <label for="department_id">Department:</label>
+            <select id="department_id" name="department_id" required>
+                {% for dept in departments %}
+                    <option value="{{ dept.Department_ID }}">{{ dept.Department_Name }}</option>
+                {% endfor %}
+            </select><br>
+
+            <button type="submit" class="button">Add Doctor</button>
+            <a href="{{ url_for('doctors') }}" class="button back-button">Cancel</a>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

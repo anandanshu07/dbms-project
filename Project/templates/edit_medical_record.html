@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Edit Medical Record</h1>
+    
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('edit_medical_record', id=record.Record_ID) }}">
+                
+                <div class="mb-3">
+                    <label for="patient_id" class="form-label">Patient:</label>
+                    <select class="form-select" id="patient_id" name="patient_id" required>
+                        {% for pat in patients %}
+                            <option value="{{ pat.Patient_ID }}" {% if pat.Patient_ID == record.Patient_ID %}selected{% endif %}>
+                                {{ pat.Patient_Name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="doctor_id" class="form-label">Doctor:</label>
+                    <select class="form-select" id="doctor_id" name="doctor_id" required>
+                        {% for doc in doctors %}
+                            <option value="{{ doc.Doctor_ID }}" {% if doc.Doctor_ID == record.Doctor_ID %}selected{% endif %}>
+                                {{ doc.Doctor_Name }} ({{ doc.Specialization }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="symptoms" class="form-label">Symptoms:</label>
+                    <textarea class="form-control" id="symptoms" name="symptoms" rows="4">{{ record.Symptoms }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="diagnosis" class="form-label">Diagnosis:</label>
+                    <textarea class="form-control" id="diagnosis" name="diagnosis" rows="4">{{ record.Diagnosis }}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Medical Record</button>
+                <a href="{{ url_for('medical_records') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

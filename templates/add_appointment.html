@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Appointment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Schedule New Appointment</h1>
+        <form method="POST" action="{{ url_for('add_appointment') }}">
+            <label for="patient_id">Patient:</label>
+            <select id="patient_id" name="patient_id" required>
+                {% for pat in patients %}
+                    <option value="{{ pat.Patient_ID }}">{{ pat.Patient_Name }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="doctor_id">Doctor:</label>
+            <select id="doctor_id" name="doctor_id" required>
+                {% for doc in doctors %}
+                    <option value="{{ doc.Doctor_ID }}">{{ doc.Doctor_Name }} ({{ doc.Specialization }})</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="appointment_date">Appointment Date & Time:</label>
+            <input type="datetime-local" id="appointment_date" name="appointment_date" required><br>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="Scheduled">Scheduled</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+            </select><br>
+
+            <button type="submit" class="button">Schedule Appointment</button>
+            <a href="{{ url_for('appointments') }}" class="button back-button">Cancel</a>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
