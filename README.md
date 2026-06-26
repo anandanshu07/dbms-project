@@ -1,52 +1,75 @@
-# Library Management System - DBMS Project
+Hospital Management System
 
-A database-driven web application developed using Python, HTML, CSS, and SQL concepts to efficiently manage and organize records.
+A full-stack database-driven web application developed using Flask and MySQL to streamline hospital operations, including patient records, doctor management, appointments, departments, and medical records through an intuitive web interface.
 
-## Features
+Features
 
-- Create, Read, Update, and Delete (CRUD) operations
-- Structured database management
-- User-friendly web interface
-- Efficient record searching and retrieval
-- Data validation and integrity handling
+* Secure CRUD operations for Patients, Doctors, Departments, Appointments, and Medical Records
+* Relational database design with normalized MySQL schema
+* Appointment scheduling and management
+* Doctor-to-department mapping
+* Medical history and diagnosis management
+* Data validation and referential integrity using foreign key constraints
+* Responsive web interface built with HTML and CSS
 
-## Tech Stack
+Tech Stack
 
-- Python
-- HTML
-- CSS
-- SQL / DBMS Concepts
+* Python (Flask)
+* MySQL
+* HTML
+* CSS
 
-## Project Structure
+Database Design
 
-text dbms-project/ │ ├── app.py ├── templates/ ├── static/ │   └── css/ └── Project/ 
+The system follows a normalized relational schema consisting of:
 
-## Installation
+* Department
+* Doctor
+* Patient
+* Appointment
+* Medical Record
+
+Relationships are maintained using primary and foreign key constraints to ensure data consistency and integrity.
+
+Project Structure
+
+hospital-management-system/
+├── app.py
+├── templates/
+├── static/
+│   └── css/
+├── hospital_db.sql
+└── README.md
+
+Installation
 
 1. Clone the repository
 
-bash git clone https://github.com/anandanshu07/dbms-project.git 
+git clone https://github.com/anandanshu07/dbms-project.git
 
 2. Navigate to the project directory
 
-bash cd dbms-project 
+cd dbms-project
 
-3. Install dependencies
+3. Install the required dependencies
 
-bash pip install -r requirements.txt 
+pip install -r requirements.txt
 
-4. Run the application
+4. Configure MySQL credentials in app.py.
+5. Import the SQL database.
+6. Run the application
 
-bash python app.py 
+python app.py
 
-## Learning Outcomes
+Learning Outcomes
 
-- Database design and normalization
-- SQL query implementation
-- Backend integration with databases
-- CRUD application development
-- Web application deployment fundamentals
+* Relational database design and normalization
+* SQL query optimization
+* CRUD application development using Flask
+* Backend integration with MySQL
+* Database constraint management
+* Full-stack web application development
 
-## Author
+Author
 
 Anshu Anand
